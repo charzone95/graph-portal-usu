@@ -37,5 +37,6 @@
 		<hr style="margin-top:20px"/>
 		
 		<p>Source code available at <a href="https://github.com/charzone95/graph-portal-usu" target="_BLANK">github.com/charzone95/graph-portal-usu</a></p>
+		<p>Thanks to Fachrin for the login code</p>
 	</body>
 </html>
