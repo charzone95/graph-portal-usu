@@ -25,13 +25,14 @@ if ($login) {
 	$postData = [];
 	
 	$explode = explode('<option value="', $options) ;
-	unset($explode[count($explode)-1]);
+	
 	unset($explode[0]);
 	foreach ($explode as $key=>$val) {
 		$semester[] = @reset(explode('</option>', explode('" >', $val)[1]));
 		$postData[] = @reset(explode('" >', $val));
 		
 	}
+	
 	
 	$sks = [];
 	$ip = [];
@@ -49,17 +50,16 @@ if ($login) {
 	$series = [];
 	$ipk = 0;
 	$jlhSks = 0;
+	$semester2 = [];
 	for ($i=0;$i<count($semester);$i++) {
 		if ($ip[$i] <= 0) {
-			unset($ip[$i]);
-			unset($semester[$i]);
-			unset($sks[$i]);
 		} else {
 			$temp = [];
 			$temp['y'] = (float)$ip[$i];
 			$temp['semester'] = $semester[$i];
 			$temp['sks'] = $sks[$i];
 				
+			$semester2[] = $semester[$i];
 			
 			$ipk += $ip[$i] * $sks[$i];
 			$jlhSks += $sks[$i];
@@ -111,6 +111,11 @@ if ($login) {
 			<td colspan="2" align="right"><b>IP Kumulatif</b></td>
 			<td><b><?php echo number_format($ipk, 2)?></b></td>
 		</tr>
+		<tr>
+			<td colspan="3">
+				<i>(Perhitungan IPK mungkin kurang tepat)</i>
+			</td>
+		</tr>
 	</table>
 	
 	<script>
@@ -123,7 +128,7 @@ if ($login) {
 	    	    text: 'Universitas Sumatera Utara'
 	    	},
 	        xAxis: {
-	            categories: <?php echo json_encode($semester)?>
+	            categories: <?php echo json_encode($semester2)?>
 	        },
 	        yAxis: {
 	            title: {
